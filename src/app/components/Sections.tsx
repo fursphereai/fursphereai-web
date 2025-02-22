@@ -9,6 +9,7 @@ const sectionBaseStyles = "flex flex-col md:flex-row items-center justify-betwee
 const Section1 = () => {
   const video1Ref = useRef<HTMLVideoElement | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
   const textSequence = ["HEALTH", "FOOD", "DAILY LIVES"];
   const [displayText, setDisplayText] = useState(textSequence[0]);
   const [fade, setFade] = useState(true);
@@ -31,7 +32,7 @@ const Section1 = () => {
         textIndex = (textIndex + 1) % textSequence.length;
         setDisplayText(textSequence[textIndex]);
         setFade(true);
-      }, 2000);
+    }, 2000);
     }, 3000);
 
     return () => {
@@ -40,22 +41,35 @@ const Section1 = () => {
     };
   }, []);
 
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
-    <section className={`${sectionBaseStyles} mt-[70px] md:mt-[100px]`}>
-      <div className="w-full md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
+    <section className="w-screen bg-white flex flex-col md:flex-row items-center justify-center px-4 md:px-8 lg:px-20">
+      {/* 左侧内容 */}
+      <div className="flex flex-col items-center w-full md:w-1/2 aspect-[1440/640] object-cover">
         <video
-          className="w-full max-w-[700px] rounded-[20px] md:rounded-[40px]"
+          className="relative w-[72vw] md:w-full max-w-[700px] aspect-[700/630]"
           ref={video1Ref}
           autoPlay
           loop={false}
           muted
-          style={{ clipPath: "inset(1% 1% 1% 1%)" }}
+          style={{
+            clipPath: "inset(1% 1% 1% 1%)",
+          }}
         >
           <source src="/video/landing.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col items-center md:items-start space-y-6 md:space-y-8">
+      {/* 右侧内容 */}
+      <div className="items-center flex flex-col text-left gap-y-[20px] lg:gap-y-[32px] w-full md:w-1/2 md:items-start">
         <h1 className="text-[24px] md:text-[36px] lg:text-[48px] font-UbuntuLight text-[#505D90] lg:w-[447px] max-w-[480px] text-center md:text-left md:leading-[48.8px] lg:leading-[57.6px] tracking-[-0.04em] md:ml-[45px] lg:ml-[80px]">
           A pet concierge that<br />
           manages your pets' <br />
@@ -66,9 +80,79 @@ const Section1 = () => {
 
         {/* Email subscription and Discord link */}
         <div className="flex flex-row items-center w-[250.76px] md:w-[443px] space-x-[10px] md:space-x-[9px] lg:space-x-[12px] md:ml-[45px] lg:ml-[80px]">
-          {/* ... 其余Section1的JSX代码 ... */}
+          {/* 邮件订阅框 */}
+          <div className="flex items-center bg-[#E8EBF6] rounded-full shadow-md w-[260px] md:w-[260px] lg:w-[321px] aspect-[321/50] max-w-[321px]">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 bg-transparent text-[9.33px] md:text-[13px] outline-none text-gray-600 placeholder-gray-400 px-4"
+            />
+            <button 
+              className="bg-custom-gradient text-white font-[700] w-[73.92px] md:w-[100px] lg:w-[132px] aspect-[132/50] max-w-[132px] ml-[-9.17vw] rounded-full shadow-md flex items-center justify-center transition duration-10 hover:brightness-75 h-full"
+              onClick={handleOpenPopup}
+            >
+              <span className="text-[9.33px] md:text-[13px] lg:text-[16px] max-w-[132px]">
+                Subscribe
+              </span>
+            </button>
+          </div>
+
+          {/* Discord链接 */}
+          <span className="relative text-[8px] md:text-[11px] lg:text-[13px] max-w-[38px] text-[#A4AAC2] whitespace-nowrap">
+            or join
+          </span>
+
+          <Link href="https://discord.gg/676cBXbZhW">
+            <Image
+              src="/discord-icon.svg"
+              alt="Discord Icon"
+              width={50}
+              height={50}
+              className="w-[28px] md:w-[41px] lg:w-[50px] max-w-[50px] h-auto transition duration-10 hover:brightness-75"
+            />
+          </Link>
+        </div>
+
+        {/* 应用商店按钮 */}
+        <div className="flex items-center space-x-[25px] lg:space-x-[31px] md:w-[300px] lg:w-[433px] md:ml-[45px] lg:ml-[80px]">
+          <Image
+            src="/apple-logo.svg"
+            alt="Apple"
+            width={201}
+            height={59.21}
+            className="h-auto transition duration-300 hover:brightness-75 w-[116px] md:w-[160px] lg:w-[201px]"
+          />
+          <Image
+            src="/google-logo.svg"
+            alt="Google"
+            width={201}
+            height={59.21}
+            className="h-auto transition duration-300 hover:brightness-75 w-[116px] md:w-[160px] lg:w-[201px]"
+          />
         </div>
       </div>
+
+      {/* 订阅成功弹窗 */}
+      {isPopupOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-in-out">
+          <div className="bg-white rounded-3xl p-8 shadow-lg max-w-md w-full transform transition-transform duration-300 ease-in-out">
+            <h2 className="text-xl font-semibold text-[#505D90] mb-4">
+              Success!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Please check your email address for additional instructions
+            </p>
+            <div className="flex justify-end">
+              <button
+                onClick={handleClosePopup}
+                className="px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-500"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
@@ -77,35 +161,34 @@ const Section1 = () => {
 const Section2 = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  };
-
   return (
-    <section className={sectionBaseStyles}>
-      <div className="w-full md:w-1/2 flex flex-col items-center md:items-start space-y-6 md:space-y-8 order-2 md:order-1">
-        <h1 className="text-[24px] md:text-[36px] lg:text-[48px] text-[#505D90] font-Ubuntu text-center md:text-left">
-          Compare prices across <br />
-          <span className="text-[#5777D0]">10+</span> stores best pet <br />
-          supplies.
-        </h1>
-        <button className="w-[120px] md:w-[149px] h-[48px] bg-gradient-to-br from-[#5676CF] to-[#AFBFE9] text-white rounded-full">
-          Sign up
-        </button>
-      </div>
-      <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2 mb-8 md:mb-0">
-        <video
-          className="w-full max-w-[700px] rounded-[20px] md:rounded-[40px]"
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          style={{ clipPath: "inset(1% 1% 1% 1%)" }}
-        >
-          <source src="/video/page1.mp4" type="video/mp4" />
-        </video>
+    <section className="w-full relative bg-white h-[560px] overflow-hidden text-left text-[32px] text-[#505D90] font-Ubuntu">
+      <div className="absolute top-0 left-[calc(50%-620px)] w-[1240px] flex flex-row items-center justify-between">
+        {/* Left Content */}
+        <div className="w-[520px] flex flex-col items-start gap-8">
+          <h1 className="text-[32px] text-[#505D90] font-Ubuntu tracking-[-0.04em] leading-[120%]">
+            Compare prices across <br />
+            <span className="text-[#5777D0]">10+</span> stores best pet <br />
+            supplies.
+          </h1>
+          <button className="rounded-[22px] bg-[#5777D0] h-11 overflow-hidden flex flex-row items-center justify-center px-8 text-white font-semibold">
+            Sign up
+          </button>
+        </div>
+
+        {/* Right Content - Video */}
+        <div className="w-[630px] relative bg-white h-[560px]">
+          <video
+            ref={videoRef}
+            className="absolute top-[calc(50%-280px)] left-[calc(50%-315px)] w-[630px] h-[560px] object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/video/page1.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
     </section>
   );
@@ -115,37 +198,37 @@ const Section2 = () => {
 const Section3 = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  };
-
   return (
-    <section className={sectionBaseStyles}>
-      <div className="w-full md:w-1/2 flex justify-center order-2 md:order-1">
-        <video
-          className="w-full max-w-[700px] rounded-[20px] md:rounded-[40px]"
-          ref={videoRef}
-          autoPlay
-          loop={false}
-          muted
-          onMouseEnter={handleMouseEnter}
-          style={{ clipPath: "inset(1% 1% 1% 1%)" }}
-        >
-          <source src="/video/page2.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div className="w-full md:w-1/2 flex flex-col items-center md:items-start space-y-6 md:space-y-8 order-1 md:order-2">
-        <h1 className="text-[24px] md:text-[36px] lg:text-[48px] text-[#505D90] font-Ubuntu text-right md:text-left">
-          Help you know{" "}
-          <span className="text-[#5777D0]">everything</span> <br />
-          about your pet, even when<br />
-          not at home.
-        </h1>
-        <button className="w-[120px] md:w-[149px] h-[48px] bg-gradient-to-br from-[#5676CF] to-[#AFBFE9] text-white rounded-full">
-          Subscribe
-        </button>
+    <section className="w-full relative bg-white h-[560px] overflow-hidden text-left text-[32px] text-[#505D90] font-Ubuntu">
+      <div className="absolute top-0 left-[calc(50%-620px)] w-[1240px] flex flex-row items-center justify-between">
+        {/* Left Content */}
+        <div className="w-[520px] flex flex-col items-start gap-8">
+          <div className="w-[520px] tracking-[-0.04em] leading-[120%]">
+            <span>Track your pets' </span>
+            <b className="text-[#5777D0]">health records </b>
+            <span>and get reminders for upcoming appointments.</span>
+          </div>
+          
+          <div className="flex flex-row items-center justify-end text-center text-base text-white font-Inter">
+            <button className="rounded-[22px] bg-[#5777D0] h-11 overflow-hidden flex flex-row items-center justify-center px-8">
+              <span className="font-semibold">Get Started</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Right Content - Video */}
+        <div className="w-[630px] relative bg-white h-[560px]">
+          <video
+            ref={videoRef}
+            className="absolute top-[calc(50%-280px)] left-[calc(50%-315px)] w-[630px] h-[560px] object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/video/page2.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
     </section>
   );
@@ -155,39 +238,38 @@ const Section3 = () => {
 const Section4 = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  };
-
   return (
-    <section className={sectionBaseStyles}>
-      <div className="w-full md:w-1/2 flex flex-col items-center md:items-start space-y-6 md:space-y-8 order-2 md:order-1">
-        <h1 className="text-[24px] md:text-[36px] lg:text-[48px] text-[#505D90] font-Ubuntu text-center md:text-left">
-          Convert medical records <br />
-          into{" "}
-          <span className="text-[#5777D0]">pet parent-friendly</span> <br />
-          terms for easier understanding.
-        </h1>
-        <Link href="https://discord.gg/676cBXbZhW">
-          <button className="w-[120px] md:w-[149px] h-[48px] bg-gradient-to-br from-[#5676CF] to-[#AFBFE9] text-white rounded-full">
-            Join Discord
-          </button>
-        </Link>
-      </div>
-      <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2 mb-8 md:mb-0">
-        <video
-          className="w-full max-w-[700px] rounded-[20px] md:rounded-[40px]"
-          ref={videoRef}
-          autoPlay
-          loop={false}
-          muted
-          onMouseEnter={handleMouseEnter}
-          style={{ clipPath: "inset(1% 1% 1% 1%)" }}
-        >
-          <source src="/video/page3.mp4" type="video/mp4" />
-        </video>
+    <section className="w-full relative bg-white h-[560px] overflow-hidden text-left text-[32px] text-[#505D90] font-Ubuntu">
+      <div className="absolute top-0 left-[calc(50%-620px)] w-[1240px] flex flex-row items-center justify-between">
+        <div className="w-[520px] flex flex-col items-start gap-8">
+          <div className="w-[520px] tracking-[-0.04em] leading-[120%]">
+            <span>Convert medical records into </span>
+            <b className="text-[#5777D0]">pet parent-friendly </b>
+            <span>terms for easier understanding.</span>
+          </div>
+          
+          <Link href="https://discord.gg/676cBXbZhW">
+            <button className="relative rounded-[22px] bg-[#5777D0] w-full h-[44px] overflow-hidden flex flex-row items-center justify-center px-8 box-border text-center text-base text-white font-Inter font-semibold hover:bg-[#4666BF] transition-colors">
+              Join Discord
+            </button>
+          </Link>
+        </div>
+
+        {/* Right Content - Video with iPhone frame */}
+        <div className="w-[630px] relative bg-white h-[560px] text-center text-[8.5px] text-[#0D0D0E] font-['SF_Pro_Text']">
+          <video
+            ref={videoRef}
+            className="absolute top-[calc(50%-280px)] left-[calc(50%-315px)] w-[630px] h-[560px] object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/video/page3.mp4" type="video/mp4" />
+          </video>
+          {/* Highlight Effect */}
+          <div className="absolute top-[127.5px] left-[396.5px] shadow-[0px_10px_40px_#7EABFA] rounded-full bg-[rgba(175,191,236,0.5)] border-5 border-solid border-white box-border w-9 h-9 opacity-0" />
+        </div>
       </div>
     </section>
   );
