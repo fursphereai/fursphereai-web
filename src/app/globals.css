@@ -86,3 +86,13 @@ html, body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .social-button-base {
+    @apply w-[44px] h-[44px] relative rounded-[22px] overflow-hidden flex-shrink-0;
+  }
+  
+  .button-base {
+    @apply h-[44px] rounded-[22px] overflow-hidden flex flex-row items-center justify-center px-[32px] py-[16px] box-border;
+  }
+}

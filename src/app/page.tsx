@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Header from './components/header';
+import Header from './components/Header';
 import Section1 from './components/sections/Section1';
 import  {Section2, Section3, Section4}  from './components/sections/Sections';
 import Section5 from './components/sections/Section5';
