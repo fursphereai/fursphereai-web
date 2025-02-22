@@ -2,12 +2,8 @@
 
 import React,{ useEffect, useRef, useState } from 'react';
 import Header from './components/header';
-import Section1 from './components/Section1';
-import Section2 from './components/Section2';
-import Section3 from './components/Section3';
-import Section4 from './components/Section4';
-import Section5 from './components/Section5';
-import Section6 from './components/Section6';
+import Sections from './components/Sections';
+import Footer from './components/Footer';
 
 const Home = () => {
 
@@ -61,17 +57,11 @@ const Home = () => {
 
 
   return (
-    <div className = "relative aspect-[1440/3742] bg-[#FFFFFF] ">
-      <Header/>
-      <main className = 'bg-[#FFFFFF]'> 
-      <Section1/>
-      <Section2/>
-      <Section3/>
-      <Section4/>
-      <Section5/>
-      <Section6/>
-      </main>
-    </div>
+    <main>
+      <Header />
+      <Sections />
+      <Footer />
+    </main>
   );
 };
 

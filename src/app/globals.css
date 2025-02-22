@@ -2,11 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-rgb: 255, 255, 255;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--background-rgb);
+  color: var(--foreground-rgb);
 }
 
 @media (prefers-color-scheme: dark) {
