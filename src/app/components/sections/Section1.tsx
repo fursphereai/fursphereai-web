@@ -50,7 +50,12 @@ const Section1 = () => {
     };
   
     return (
-      <section className="w-screen bg-white flex flex-col md:flex-row items-center justify-center px-4 md:px-8 lg:px-20">
+      <section className="
+        flex flex-col md:flex-row 
+        mt-[96px] md:mt-[100px]
+        w-screen max-w-[768px] md:max-w-[1440px] 
+        mx-auto 
+        items-center justify-center">
         <VideoSection videoRef={video1Ref} />
         <ContentSection 
           displayText={displayText} 
@@ -65,11 +70,20 @@ const Section1 = () => {
   };
 
 const VideoSection = ({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement> }) => (
-  <div className="flex flex-col items-center w-full md:w-1/2 aspect-[1440/640] object-cover">
-    <div className="relative w-[700px] h-[630px]">
-      <div className="change-shadow-type-parent relative w-full h-full">
+  
+    <div className="relative 
+    flex flex-col 
+    max-w-[768px] md:max-w-[700px] 
+    items-center justify-center">
+      <div className=" 
+      flex flex-col items-center justify-center
+      h-full w-full  ">
         <video
-          className="absolute w-full h-full"
+          className="
+          w-full 
+          h-full
+          select-none
+           "
           ref={videoRef}
           autoPlay
           loop={false}
@@ -81,12 +95,12 @@ const VideoSection = ({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement
           <source src="/video/landing.mp4" type="video/mp4" />
         </video>
         {/* 添加阴影效果层 */}
-        <div className="absolute bottom-0 left-0 w-full">
+        {/* <div className="absolute bottom-0 left-0 w-full">
           <img className="w-full" src="Change Shadow Type.png" alt="" />
-        </div>
+        </div> */}
       </div>
     </div>
-  </div>
+  
 );
 
 const ContentSection = ({ 
@@ -96,7 +110,14 @@ const ContentSection = ({
   displayText: string;
   onSubscribe: () => void;
 }) => (
-  <div className="frame-group flex flex-col items-start w-full md:w-1/2 gap-8 pl-8">
+  <div className="
+   frame-group 
+  mt-[40px] md:mt-[0px]
+  flex flex-col 
+  items-center md:items-start
+  w-[704px] md:w-[501px] 
+ 
+  gap-y-[20px] md:gap-y-[32px]">
     <TitleSection displayText={displayText} />
     <StoreButtons />
     <SocialSection onSubscribe={onSubscribe} />
@@ -104,19 +125,30 @@ const ContentSection = ({
 );
 
 const TitleSection = ({ displayText }: { displayText: string }) => (
-  <div className="a-pet-concierge-that-manage-yo-parent">
-    <h1 className="text-[24px] md:text-[36px] lg:text-[48px] font-UbuntuLight text-[#505D90] leading-[120%] tracking-[-0.04em]">
-      A pet concierge that<br />
+  // [@media(max-width:560px)]:w-1/2
+    <h1 className="
+    w-full max-[535px]:w-2/3 max-[464px]:w-1/2
+    text-[32px] md:text-[48px]
+    text-center md:text-left
+    font-UbuntuLight 
+    text-[#505D90] 
+    leading-[38.4px] md:leading-[57.6px] 
+    tracking-[-1.2px] md:tracking-[-1.92px]">
+      A pet concierge that
       manages your pets' <br />
-      <span className="font-balooExtraBold text-[32px] md:text-[48px] lg:text-[64px] bg-gradient-to-t from-[#AFBFE9] via-[#5777D0] to-[#AFBFE9] bg-clip-text text-transparent">
+      <span className="
+      font-balooExtraBold 
+      leading-[57.6px] md:leading-[76.8px]
+      text-[48px] md:text-[64px] 
+      bg-gradient-to-t from-[#AFBFE9] via-[#5777D0] to-[#AFBFE9] bg-clip-text text-transparent">
         {displayText}
       </span>
     </h1>
-  </div>
+ 
 );
 
 const StoreButtons = () => (
-  <div className="button-parent w-full relative flex flex-row items-center justify-start gap-[24px]">
+  <div className="button-parent w-full flex flex-row items-center justify-center md:justify-start gap-[16px] md:gap-[24px]">
     <StoreButton 
       href="https://apps.apple.com/fursphere"
       src="/apple-logo.svg"
@@ -135,13 +167,13 @@ const StoreButton = ({ href, src, alt }: { href: string; src: string; alt: strin
     href={href} 
     target="_blank"
     rel="noopener noreferrer"
-    className="button w-[140px] h-[42px] rounded-[30.96px] bg-white border-[1.8px] border-[#EFEFEF] overflow-hidden hover:opacity-80 transition-opacity"
+    className="button w-[150.3px] h-[43.8px] rounded-[30.957px] bg-white border-[1.82px] border-[#EFEFEF] overflow-hidden hover:opacity-80 transition-opacity"
   >
     <Image 
       src={src}
       alt={alt}
-      width={201}
-      height={59.21}
+      width={150.3}
+      height={43.8}
       className="w-full h-full object-cover"
       priority
     />
@@ -149,7 +181,7 @@ const StoreButton = ({ href, src, alt }: { href: string; src: string; alt: strin
 );
 
 const SocialSection = ({ onSubscribe }: { onSubscribe: () => void }) => (
-  <div className="button-parent flex flex-row items-center justify-start gap-[12px] w-full text-center font-Inter">
+  <div className="button-parent flex flex-row items-center justify-center md:justify-start gap-[12px] w-full text-center font-Inter">
     <SubscribeButton onClick={onSubscribe} />
     <div className="or-join relative text-[13px] leading-[24px] tracking-[-0.01em] text-[#A4AAC2] text-left">
       or join

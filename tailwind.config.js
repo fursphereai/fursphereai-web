@@ -30,6 +30,9 @@ module.exports = {
         '128': '32rem',
         '144': '36rem',
       },
+      width: {
+        'video': '76.38%',
+      }
     },
   },
   plugins: [

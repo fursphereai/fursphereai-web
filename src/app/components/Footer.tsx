@@ -10,12 +10,13 @@ const Footer = () => {
   };
 
   return (
-    <div className="frame-parent w-full relative bg-[#5777D0] h-[364px] overflow-hidden flex-shrink-0 text-center font-Inter text-[#D1D7EF]">
-      <div className="frame-group w-[calc(100%-200px)] absolute top-[51.78px] right-[100px] left-[100px] flex flex-col items-start justify-start gap-[90px]">
+    <div className="flex justify-center  mt-0 max-w-[1440px] w-full  bg-[#5777D0] h-[414px] md:h-[364px] overflow-hidden flex-shrink-0 text-center font-Inter text-[#D1D7EF]">
+      <div className="my-[40px] md:my-[52px]  frame-group w-full max-w-[1240px]  flex flex-col items-start justify-start gap-y-[40px] md:gap-[90px]">
         {/* Upper Section */}
-        <div className="frame-container self-stretch flex flex-row items-start justify-between px-[40px]">
+        
+        <div className=" w-full frame-container  flex flex-col md:flex-row items-center md:items-start justify-between px-[40px] gap-y-[40px]">
           {/* Left Side - Social Links */}
-          <div className="button-parent flex flex-row items-center justify-start gap-[12px]">
+          <div className="button-parent   flex flex-row items-center justify-start gap-[12px]">
             <SubscribeButton onClick={handleSubscribe} darkMode={true} />
             <div className="or-join relative text-[14px] text-[#F5F5F5] text-left">or join</div>
             <SocialButton 
@@ -41,9 +42,9 @@ const Footer = () => {
           </div>
 
           {/* Right Side - Links */}
-          <div className="frame-div flex flex-row items-start justify-start gap-[60px] text-left text-white">
-            <FooterLinkGroup title="Company" links={['Terms of Use', 'Privacy Policy']} />
-            <FooterLinkGroup title="Contact" links={['Email', 'Support']} />
+          <div className=" frame-div flex flex-row items-start  gap-[60px]  text-white ">
+            <FooterLinkGroup title="Company" links={['Terms of Use', 'Support', 'Privacy Policy']} />
+            <FooterLinkGroup title="Contact" links={['Linkedin', 'Youtube']} />
           </div>
         </div>
 
@@ -56,9 +57,9 @@ const Footer = () => {
 
 // 新增的子组件
 const FooterLinkGroup = ({ title, links }: { title: string, links: string[] }) => (
-  <div className={`${title.toLowerCase()}-parent w-[97px] flex flex-col items-start justify-start gap-[20px]`}>
-    <div className="company self-stretch relative tracking-[-0.04em] leading-[100%]">{title}</div>
-    <div className="terms-of-use-parent self-stretch flex flex-col items-start justify-start gap-[12px]">
+  <div className={`${title.toLowerCase()}-parent   w-auto flex flex-col items-center justify-center gap-y-[20px]`}>
+    <div className="company  relative tracking-[-0.64px] leading-[16px] text-[14px] md:text-[16px] font-[700]">{title}</div>
+    <div className="terms-of-use-parent flex flex-col gap-[12px] text-[14px] md:text-[16px] font-[400]">
       {links.map((link, index) => (
         <div key={index}>{link}</div>
       ))}
@@ -67,25 +68,36 @@ const FooterLinkGroup = ({ title, links }: { title: string, links: string[] }) =
 );
 
 const FooterBottom = () => (
-  <div className="frame-parent1 self-stretch flex flex-row items-end justify-between px-[40px] text-left text-[14px] text-[#E8EBF6]">
-    <div className="copyright-2025-fursphere-al-parent w-[307px] relative h-[61.8px]">
-      <div className="fursphere-parent absolute top-0 left-0 w-[126px] h-[38.4px] text-[16.05px] text-white font-['Baloo_2']">
-        <Image
-          src="/logo.svg"
-          alt="Fursphere Logo"
-          width={27}
-          height={27}
-          className="frame-child absolute h-[71.35%] w-[21.75%] top-[14.06%] right-[71.43%] bottom-[14.58%] left-[6.83%]"
-        />
-        <div className="fursphere absolute top-[6.44px] left-[calc(50%-21.3px)] font-extrabold">
+  <div className="frame-parent1 self-stretch gap-y-[40px] md:gap-y-[0px]
+  flex flex-col-reverse md:flex-row items-center md:items-end justify-between 
+  px-[40px] 
+  text-left text-[14px] text-[#E8EBF6]">
+
+    <div className=" copyright-2025-fursphere-al-parent flex flex-row  md:flex-col items-center md:items-start justify-between w-[307px] h-[30px] md:h-[61.8px]">
+      
+      <div className="flex flex-row ml-0 md:ml-[8.6px] items-center justify-left fursphere-parent  max-w-[109px] w-full   text-white font-['Baloo_2']">
+          <div className="w-[27px] h-[27px]">
+            <Image
+              src="/footer-logo.svg"
+              alt="Fursphere Logo"
+              width={27}
+              height={27}
+              className="frame-child w-full h-full"
+          />
+        </div>
+        <div className="fursphere text-[14px] md:text-[16px] font-[800] ml-[5.7px]">
           Fursphere
         </div>
       </div>
-      <div className="copyright-2025 absolute top-[calc(50%+16.88px)] left-[calc(50%-144.5px)] tracking-[-0.04em] leading-[100%]">
+
+      <div className="copyright-2025 ml-0 md:ml-[8.6px] text-[8px] md:text-[14px]  tracking-[-0.04em] leading-[100%]">
         Copyright © 2025 Fursphere. All rights reserved.
       </div>
     </div>
-    <div className="start-caring-more relative text-[40px] tracking-[-0.04em] leading-[100%] font-['Baloo_2'] bg-gradient-to-b from-white to-white bg-clip-text text-transparent">
+
+    <div className=" 
+    text-[36px] md:text-[40px] font-[700] 
+    tracking-[-0.04em] leading-[100%] font-['Baloo_2'] bg-gradient-to-b from-white to-white bg-clip-text text-transparent">
       Start caring more
     </div>
   </div>
